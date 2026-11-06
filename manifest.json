@@ -3,7 +3,7 @@
   "name": "Note to Agent",
   "version": "1.0.0",
   "minAppVersion": "1.0.0",
-  "description": "一键把当前笔记发送到 Agent：复制内容与路径到剪贴板并唤起目标 App（Alma / Codex / Claude 都行）。内容只走本地剪贴板、不上传。",
+  "description": "Send the current note to any AI agent app in one click: copies the note (and optionally its path) to the clipboard and launches the target app. Uses the local clipboard only — nothing is uploaded.",
   "author": "geekcx",
   "authorUrl": "https://github.com/geekcx",
   "isDesktopOnly": true

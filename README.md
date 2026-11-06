@@ -1,55 +1,64 @@
-# Note to Agent（Obsidian 插件）
+# Note to Agent
 
-作者：[geekcx](https://github.com/geekcx) · 许可证：MIT
+An Obsidian plugin that sends the note you are reading to any AI agent app — your desktop agent, a coding CLI wrapper, whatever you use. One click copies the note (and optionally its path) to the clipboard and launches the target app, so you can paste it straight into the agent input box.
 
-> 已提交到 Obsidian 社区插件目录：在 Obsidian 里 设置 → 第三方插件 → 搜索 **Note to Agent** 即可安装。
+Author: [geekcx](https://github.com/geekcx) · License: MIT
 
-## 它解决什么问题
+## The problem
 
-Obsidian 的文件树是虚拟界面。把笔记从文件树拖到别的 App 时，对方拿到的只是
+Obsidian's file tree is a virtual UI. When you drag a note out of it, other apps receive an obsidian://open?vault=...&file=... link — **not the actual file**.
 
-```
-obsidian://open?vault=Vault&file=Note.md
-```
+Most agent apps only accept real file drops (their drop handlers read `dataTransfer.files`). A link-drag carries no file, so nothing happens. You end up copying the note path manually every time.
 
-这样的链接，**不是真实文件**。而各家 Agent 的输入框基本只认「真实文件拖拽」
-（drop 处理只读 `dataTransfer.files`），所以从 Obsidian 拖笔记进 Agent 一直没有反应。
+The community plugin [Drag Out](https://github.com/xwberry/obsidian-drag-out) tries to fix this with Electron's `webContents.startDrag`, but it is only verified on Windows and does not work reliably on macOS.
 
-（社区里有个 [Drag Out](https://github.com/xwberry/obsidian-drag-out) 插件试图用
-Electron `webContents.startDrag` 解决，但只在 Windows 上验证过，macOS 不可用。）
+## How it works
 
-## 用法
+Instead of dragging, this plugin bypasses the problem entirely:
 
-1. 把本目录整个拷到你的 vault：
+1. Reads the current note from the vault.
+2. Copies the note body (optionally prefixed with its absolute path) to the clipboard.
+3. Launches the target app.
+4. You press `Cmd+V` in that app's input box and hit Enter.
+
+No network requests. Nothing leaves your machine.
+
+## Install
+
+1. Copy this folder into your vault:
+
    ```
    <vault>/.obsidian/plugins/note-to-agent/
    ```
-2. 重启 Obsidian，设置 → 第三方插件 → 打开 **Note to Agent**。
-3. 打开任意笔记，用命令面板搜「把当前笔记发送到 Agent」，或点左侧栏的纸飞机图标。
-4. 插件会把笔记正文（可选附带绝对路径）复制到剪贴板，并唤起目标 App。
-5. 在目标 App 的输入框按 `⌘V` 粘贴，回车发送。
 
-## 目标 App
+2. Restart Obsidian, open **Settings → Community plugins**, and enable **Note to Agent**.
 
-默认唤起 **Alma**。在插件设置里可以改成任意 App 名（对应 macOS 上的 App 名称），
-实测 **Codex**、**Claude** 同样可用——只要那个 App 的输入框能粘贴文本就行。
+(Once it is listed in the Obsidian Community directory you can also install it straight from Obsidian.)
 
-## 命令
+## Usage
 
-| 命令 | 作用 |
+Open any note, then either:
+
+- run the command **"Send current note to Agent"** from the command palette, or
+- click the paper-plane icon in the left ribbon.
+
+The plugin copies the note to the clipboard and wakes the target app. Paste with `Cmd+V` and send.
+
+## Commands
+
+| Command | Action |
 | --- | --- |
-| 把当前笔记发送到 Agent | 复制「正文（+路径）」到剪贴板，并唤起目标 App |
-| 复制当前笔记的绝对路径 | 只复制绝对路径（给 Agent 让它自己读文件） |
+| Send current note to Agent | Copy the note body (+ path) to the clipboard and launch the target app |
+| Copy absolute path of current note | Copy only the note's absolute path, so the agent can read the file itself |
 
-## 设置
+## Settings
 
-| 设置 | 说明 |
+| Setting | Description |
 | --- | --- |
-| 目标 App | 唤起的应用名，默认 Alma，可填 Codex / Claude / 任意 |
-| 附带笔记绝对路径 | 粘贴内容前先加一行「【笔记路径】…」 |
+| Target app | Name of the app to launch, matching its name on macOS. Works with any agent app whose input box accepts pasted text. |
+| Include note path | Prefix the pasted content with a note-path line so the agent can read the original file. |
 
-## 备注
+## Notes
 
-- **隐私**：全程只走本机剪贴板，笔记内容不会离开这台电脑，插件没有任何网络请求。
-- 如果你更想要「真实文件拖进输入框」，目前可靠的办法是从 Finder 直接拖那个 `.md`
-  到目标 App 的输入框（Alma 的白名单里包含 `.md`，单文件 ≤10MB）。
+- **Privacy**: the plugin only uses the local clipboard. Note content never leaves your machine.
+- If you would rather have a real file drop, the reliable option today is to drag the `.md` straight from Finder into the target app's input box (the drop allow-list includes `.md`, max 10 MB per file).
