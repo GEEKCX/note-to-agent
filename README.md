@@ -4,6 +4,8 @@ An Obsidian plugin that sends the note you are reading to any AI agent app — y
 
 Author: [geekcx](https://github.com/geekcx) · License: MIT
 
+[简体中文](README.zh.md)
+
 ## The problem
 
 Obsidian's file tree is a virtual UI. When you drag a note out of it, other apps receive an obsidian://open?vault=...&file=... link — **not the actual file**.
@@ -39,7 +41,7 @@ No network requests. Nothing leaves your machine.
 
 Open any note, then either:
 
-- run the command **"Send current note to Agent"** from the command palette, or
+- run the command **把当前笔记发送到 Agent** from the command palette, or
 - click the paper-plane icon in the left ribbon.
 
 The plugin copies the note to the clipboard and wakes the target app. Paste with `Cmd+V` and send.
@@ -48,8 +50,8 @@ The plugin copies the note to the clipboard and wakes the target app. Paste with
 
 | Command | Action |
 | --- | --- |
-| Send current note to Agent | Copy the note body (+ path) to the clipboard and launch the target app |
-| Copy absolute path of current note | Copy only the note's absolute path, so the agent can read the file itself |
+| 把当前笔记发送到 Agent | Copy the note body (+ path) to the clipboard and launch the target app |
+| 复制当前笔记的绝对路径 | Copy only the note's absolute path, so the agent can read the file itself |
 
 ## Settings
 
