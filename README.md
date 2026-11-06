@@ -1,6 +1,8 @@
 # Agent Send（Obsidian 插件）
 
-作者：[geekcx](https://github.com/geekcx)
+作者：[geekcx](https://github.com/geekcx) · 许可证：MIT
+
+> 已提交到 Obsidian 社区插件目录：在 Obsidian 里 设置 → 第三方插件 → 搜索 **Agent Send** 即可安装。
 
 ## 它解决什么问题
 
