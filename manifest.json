@@ -1,0 +1,10 @@
+{
+  "id": "agent-send",
+  "name": "Agent Send",
+  "version": "0.1.0",
+  "minAppVersion": "1.0.0",
+  "description": "一键把当前笔记内容复制到剪贴板并唤起 Alma，直接粘进 Agent 输入框。",
+  "author": "geekcx",
+  "authorUrl": "https://github.com/geekcx",
+  "isDesktopOnly": true
+}
