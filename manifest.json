@@ -3,7 +3,7 @@
   "name": "Agent Send",
   "version": "1.0.0",
   "minAppVersion": "1.0.0",
-  "description": "一键把当前笔记内容复制到剪贴板并唤起 Alma，直接粘进 Agent 输入框。",
+  "description": "一键把当前笔记发送到 Alma：复制内容与路径到剪贴板并唤起 Alma。需本机装有 Alma，内容只走本地剪贴板、不上传。",
   "author": "geekcx",
   "authorUrl": "https://github.com/geekcx",
   "isDesktopOnly": true
